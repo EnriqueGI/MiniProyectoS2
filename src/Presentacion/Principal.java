@@ -24,7 +24,7 @@ public class Principal {
 	public static int Login(String mail, String clave) {
 		return DAOPersona.Login(mail, clave);
 	}
-	// jkjkjk
+	// 123
 	// Método para cargar una persona
   public static boolean CargarPersona(Persona p) {
 	  return DAOPersona.Cargargar(p);
