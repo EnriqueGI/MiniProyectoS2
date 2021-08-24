@@ -94,6 +94,7 @@ public class Login extends JFrame {
 		contentPane.add(btnNewButton);
 		
         textCorreo = new JTextArea();
+        textCorreo.setText("enrique@gmail.com");
         textCorreo.setFont(new Font("Monospaced", Font.PLAIN, 15));
 		textCorreo.setBounds(266, 133, 148, 29);
 		contentPane.add(textCorreo);

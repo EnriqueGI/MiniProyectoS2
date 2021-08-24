@@ -25,8 +25,5 @@ public class Principal {
 		return DAOPersona.Login(mail, clave);
 	}
 	
-	// Método para cargar una persona
-  public static boolean CargarPersona(Persona p) {
-	  return DAOPersona.Cargargar(p);
-  }
+
 }
