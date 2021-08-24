@@ -22,11 +22,11 @@ public class DAORol {
 	
 	private static final String INSERT_ROL = "INSERT INTO ROL(ID_ROL,NOMBRE,DESCRIPCION) VALUES(SEQ_ID_ROL.NEXTVAL,?,?)";
 
-	private static final String BUSCAR_ROL= "SELECT * FROM PERSONA WHERE ID_ROL = ?";
+	private static final String BUSCAR_ROL= "SELECT * FROM ROL WHERE ID_ROL = ?";
 	
-	private static final String UPDATE_ROL = "UPDATE PERSONA SET DOCUMENTO=?, APELLIDO1=?, APELLIDO2=?, NOMBRE1=?, NOMBRE2=? WHERE ID_PERSONA=(select id_persona from persona where documento=?";
+	private static final String UPDATE_ROL = "UPDATE ROL SET NOMBRE=?, DESCRIPCION=? WHERE ID_ROL=(select ID_ROL from persona where NOMBRE=?";
 	
-	private static final String DELETE_ROL = "DELETE FROM PERSONA WHERE ID_PERSONA=?"; 
+	private static final String DELETE_ROL = "DELETE FROM ROL WHERE ID_ROL=?"; 
 	
 	
 	
