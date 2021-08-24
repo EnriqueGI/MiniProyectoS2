@@ -348,10 +348,14 @@ public class JfPersona extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 			
-			if(!textDocumento.getText().equals("") || !textA1.getText().equals("") ||
-					!textA2.getText().equals("") || !textN1.getText().equals("") ||
-					!textN2.getText().equals("") || !textClave.getText().equals("") ||
-					!textCorreo.getText().equals("")) {
+			if(textDocumento.getText().equals("") || textA1.getText().equals("") ||
+					textA2.getText().equals("") || textN1.getText().equals("") ||
+					textN2.getText().equals("") || textClave.getText().equals("") ||
+					textCorreo.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "No pueden quedar campos vacios");
+				
+			}else {
+				
 				
 				Persona p = new Persona();
 				
@@ -368,7 +372,7 @@ public class JfPersona extends JFrame {
 				p.setMail(textCorreo.getText());
 				Rol r = new Rol();
 				r =DAORol.BuscarRolPorNombre(comboRol.getSelectedItem().toString());
-				System.out.println(r);
+				
 				p.setRol(r);
 				
 				if (DAOPersona.Cargargar(p)) {
@@ -376,14 +380,14 @@ public class JfPersona extends JFrame {
 				}else {
 					JOptionPane.showMessageDialog(null, "No se cargó la persona");
 				}
-			}else {
-				JOptionPane.showMessageDialog(null, "No pueden quedar campos vacios");
+				
+				
 			}
 		
 				
 			}
 			
-			// método que carga el combobox de los Roles
+			
 			
 		});
 		
@@ -423,7 +427,7 @@ public class JfPersona extends JFrame {
 		textA2.setText("");
 		textN1.setText("");
 		textN2.setText("");
-		//textFecha.setText("");
+		
 		textCorreo.setText("");
 	}
 }

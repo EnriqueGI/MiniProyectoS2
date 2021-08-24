@@ -64,20 +64,20 @@ public static Rol BuscarRolPorNombre(String nombre){
 			return r;
 		}catch(SQLException e) {
 			e.printStackTrace();
-			return r;
+			return null;
 		}
 		
 	}
 	
 	
 	
-public static Rol BuscarRolId(String nombre){
+public static Rol BuscarRolId(String id){
 	
     Rol r = new Rol();
   
 	try {
 		PreparedStatement statement = DatabaseManager.getConnection().prepareStatement(ROL_ID);
-		statement.setString(1,nombre);
+		statement.setString(1,id);
 		ResultSet resultado = statement.executeQuery();
 		while(resultado.next()) {
 	
@@ -89,7 +89,7 @@ public static Rol BuscarRolId(String nombre){
 		return r;
 	}catch(SQLException e) {
 		e.printStackTrace();
-		return r;
+		return null;
 	}
 	
 }
