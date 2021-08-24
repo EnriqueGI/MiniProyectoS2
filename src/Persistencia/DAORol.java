@@ -20,7 +20,8 @@ public class DAORol {
 	
 	private static final String ROL_NOMBRE = "Select * from rol where nombre=?";
 	private static final String ROL_ID= "Select * from rol where id_rol=?";
-	
+	private static final String INSERT_ROL = "INSERT INTO ROL(ID_ROL,NOMBRE,DESCRIPCION) VALUES(SEQ_ID_ROL.nextval,?,?)";
+	private static final String DELETE_ROL = "DELETE FROM ROL WHERE NOMBRE = ?";
 	
 	public static List<Rol> ListarRol(){
 		
@@ -95,46 +96,44 @@ public static Rol BuscarRolId(String id){
 }
 	
 	
+//Alta rol
+public static boolean CargarRol(Rol datos) {
+try {
+	PreparedStatement statement = DatabaseManager.getConnection().prepareStatement(INSERT_ROL);
 	
-	
-	
-	
-	
-	
-	
-	public static boolean Cargargar(Rol datos) {
-		
-		try {
-			PreparedStatement statement = DatabaseManager.getConnection().prepareStatement("");
-			
-		    /*statement.setString(1, datos.getDocumento());
-			statement.setString(2, datos.getApellido1());
-			statement.setString(3, datos.getApellido2());
-			statement.setString(4, datos.getNombre1());
-			statement.setString(5, datos.getNombre1());
-			statement.setString(6, String.valueOf(datos.getFechaNac()));
-			statement.setString(7, datos.getClave());
-			statement.setInt(8, datos.getRol().getId());
-			statement.setString(9, datos.getMail());
-			
-			
+    statement.setString(1, datos.getNombre());
+	statement.setString(2, datos.getDescripcion());
 
-			int filasIngresadas = statement.executeUpdate();
+	int filasIngresadas = statement.executeUpdate();
 
-			System.out.println("Se insentaron: " + filasIngresadas + " filas");
-			return filasIngresadas >0;
-			*/
-			return false;
-			
-		} catch (SQLException e) {
-			// TODO Bloque catch generado automáticamente
-			e.printStackTrace();
-			return false;
-		}
-	}
+	System.out.println("Se insentaron: " + filasIngresadas + " filas");
+	return filasIngresadas >0;
+} catch (SQLException e) {
+	//Bloque catch generado automáticamente
+	e.printStackTrace();
+	return false;
+}
+}
+
+//Eliminar un rol por su nombre
+public static boolean delete(String nombre) {
+try {
+	PreparedStatement statement = DatabaseManager.getConnection().prepareStatement(DELETE_ROL);
 	
+
+	statement.setString(1,nombre);
+
 	
+	int resultado = statement.executeUpdate();
+	return resultado > 0;
 	
-	
+}catch(SQLException e) {
+	e.printStackTrace();
+	return false;
+}
+}
+
+
+
 
 }
