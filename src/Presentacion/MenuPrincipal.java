@@ -57,7 +57,7 @@ public class MenuPrincipal extends JFrame {
 				
 				JfPersona fP = new JfPersona();
 			    fP.cargarRoles(DAORol.ListarRol());
-				
+			    fP.cargarComboFecha();
 				
 				fP.setVisible(true);
 			

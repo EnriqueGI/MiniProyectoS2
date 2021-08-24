@@ -12,6 +12,7 @@ import Logica.Rol;
 import Persistencia.DAOPersona;
 import Persistencia.DAORol;
 
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
@@ -24,9 +25,14 @@ import javax.swing.JComboBox;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 
 public class JfPersona extends JFrame {
-    
+    private JComboBox comboDia;
+    private JComboBox comboMes;
+    private JComboBox comboAño;
 	private JComboBox comboRol;
 	private JPanel contentPane;
 	private JTextArea textDocumento;
@@ -34,9 +40,9 @@ public class JfPersona extends JFrame {
 	private JTextArea textA2;
 	private JTextArea textN1;
 	private JTextArea textN2;
-	private JTextArea textFecha;
 	private JTextArea textCorreo;
 	private JTextArea textClave;
+	private JTable table;
 	
 
 	/**
@@ -128,40 +134,48 @@ public class JfPersona extends JFrame {
 		panel.add(lblNombre_2_1_1_2);
 		
 		textDocumento = new JTextArea();
-		textDocumento.setBounds(194, 38, 150, 23);
+		textDocumento.setBounds(194, 38, 189, 23);
 		panel.add(textDocumento);
 		
 		textA1 = new JTextArea();
-		textA1.setBounds(194, 72, 150, 23);
+		textA1.setBounds(194, 72, 189, 23);
 		panel.add(textA1);
 		
 		textA2 = new JTextArea();
-		textA2.setBounds(194, 104, 150, 23);
+		textA2.setBounds(194, 104, 189, 23);
 		panel.add(textA2);
 		
 		textN1 = new JTextArea();
-		textN1.setBounds(194, 138, 150, 23);
+		textN1.setBounds(194, 138, 189, 23);
 		panel.add(textN1);
 		
 		textN2 = new JTextArea();
-		textN2.setBounds(194, 172, 150, 23);
+		textN2.setBounds(194, 172, 189, 23);
 		panel.add(textN2);
 		
-		 textFecha = new JTextArea();
-		textFecha.setBounds(194, 206, 150, 23);
-		panel.add(textFecha);
-		
 		 textCorreo = new JTextArea();
-		textCorreo.setBounds(194, 273, 150, 23);
+		textCorreo.setBounds(194, 273, 189, 23);
 		panel.add(textCorreo);
 		
 		textClave = new JTextArea();
-		textClave.setBounds(194, 306, 150, 23);
+		textClave.setBounds(194, 306, 189, 23);
 		panel.add(textClave);
 		
 		comboRol = new JComboBox();
 		comboRol.setBounds(194, 238, 150, 22);
 		panel.add(comboRol);
+		
+	 comboDia = new JComboBox();
+		comboDia.setBounds(194, 205, 45, 22);
+		panel.add(comboDia);
+		
+		 comboMes = new JComboBox();
+		comboMes.setBounds(251, 205, 45, 22);
+		panel.add(comboMes);
+		
+		 comboAño = new JComboBox();
+		comboAño.setBounds(306, 205, 77, 22);
+		panel.add(comboAño);
 		
 		JButton btnNewButton = new JButton("Cargar");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -169,6 +183,43 @@ public class JfPersona extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Persona p = new Persona();
+				
+				if(!textDocumento.getText().equals("")) {
+					
+					p.setDocumento(textDocumento.getText());
+					p.setApellido1(textA1.getText());
+					p.setApellido2(textA2.getText());
+					p.setNombre1(textN1.getText());
+					p.setNombre2(textN2.getText());
+					LocalDate fecha = LocalDate.of(2018, 10, 30);
+					p.setFechaNac(fecha);
+					p.setClave(textClave.getText());
+					p.setMail(textCorreo.getText());
+					Rol r = new Rol();
+					r =DAORol.BuscarRolPorNombre(comboRol.getSelectedItem().toString());
+					System.out.println(r);
+					p.setRol(r);
+					
+					
+					
+					if(DAOPersona.edit(p)) {
+						JOptionPane.showMessageDialog(null, "Se actualizó la persona");
+					}else {
+						JOptionPane.showMessageDialog(null, "NO se actualizó la persona");
+					}
+					
+				}else {
+					JOptionPane.showMessageDialog(null, "Debe ingresar un documento");
+				}
+				
+				
+				
+				
+			}
+		});
 		btnEditar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnEditar.setBounds(499, 124, 132, 23);
 		contentPane.add(btnEditar);
@@ -185,7 +236,8 @@ public class JfPersona extends JFrame {
 						textDocumento.setText(p.getDocumento());
 						textA2.setText(p.getApellido2());
 						textN2.setText(p.getNombre2());
-						textFecha.setText(String.valueOf(p.getFechaNac()));
+						
+						
 						textCorreo.setText(p.getMail());
 						
 						
@@ -213,6 +265,23 @@ public class JfPersona extends JFrame {
 		contentPane.add(btnBuscar);
 		
 		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			if(!textDocumento.getText().equals("")) {
+				if(DAOPersona.delete(textDocumento.getText())){
+					JOptionPane.showMessageDialog(null, "Se eliminí la persona");
+				}else {
+					JOptionPane.showMessageDialog(null, "No hay una persona con ese documento");
+				}
+			}else {
+				JOptionPane.showMessageDialog(null, "Debe ingresar un documento");
+			}
+				
+				
+				
+			}
+		});
 		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnEliminar.setBounds(499, 169, 132, 23);
 		contentPane.add(btnEliminar);
@@ -224,6 +293,31 @@ public class JfPersona extends JFrame {
 		JButton btnListar = new JButton("Listar");
 		btnListar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				
+
+			
+				((DefaultTableModel) table.getModel()).setNumRows(0);
+
+				for (Persona p : DAOPersona.findAll()) {
+
+					
+					Object[] fila = new Object[7];
+					
+					fila[0] = String.valueOf(p.getDocumento());
+					fila[1] = String.valueOf(p.getApellido1());
+					fila[2] = String.valueOf(p.getApellido2());
+					fila[3] = String.valueOf(p.getNombre1());
+					fila[4] = String.valueOf(p.getNombre2());
+					fila[5] = String.valueOf(p.getRol().getNombre());
+					fila[6] = String.valueOf(p.getMail());
+
+					((DefaultTableModel) table.getModel()).addRow(fila);
+
+				}
+				
+				
+				
 			}
 		});
 		
@@ -231,26 +325,61 @@ public class JfPersona extends JFrame {
 		btnListar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnListar.setBounds(23, 379, 132, 23);
 		contentPane.add(btnListar);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(40, 434, 810, 166);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(52, 26, 748, 129);
+		panel_1.add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Documento", "Apellido1", "Apellido2", "Nombre1", "Nombre2", "Rol", "Mail"
+			}
+		));
+		scrollPane.setViewportView(table);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-			Persona p = new Persona();
 			
-			p.setDocumento(textDocumento.getText());
-			p.setApellido1(textA1.getText());
-			p.setApellido2(textA2.getText());
-			p.setNombre1(textN1.getText());
-			p.setNombre2(textN2.getText());
-			LocalDate fecha = LocalDate.of(2018, 10, 30);
-			p.setFechaNac(fecha);
-			p.setClave(textClave.getText());
-			p.setMail(textCorreo.getText());
-			Rol r = new Rol();
-			r =DAORol.BuscarRolPorNombre(comboRol.getSelectedItem().toString());
-			System.out.println(r);
-			p.setRol(r);
-			
-			DAOPersona.Cargargar(p);
+			if(!textDocumento.getText().equals("") || !textA1.getText().equals("") ||
+					!textA2.getText().equals("") || !textN1.getText().equals("") ||
+					!textN2.getText().equals("") || !textClave.getText().equals("") ||
+					!textCorreo.getText().equals("")) {
+				
+				Persona p = new Persona();
+				
+				p.setDocumento(textDocumento.getText());
+				p.setApellido1(textA1.getText());
+				p.setApellido2(textA2.getText());
+				p.setNombre1(textN1.getText());
+				p.setNombre2(textN2.getText());
+				LocalDate fecha = LocalDate.of(Integer.parseInt(comboAño.getSelectedItem().toString()),
+						Integer.parseInt(comboMes.getSelectedItem().toString()),
+						Integer.parseInt(comboDia.getSelectedItem().toString()));
+				p.setFechaNac(fecha);
+				p.setClave(textClave.getText());
+				p.setMail(textCorreo.getText());
+				Rol r = new Rol();
+				r =DAORol.BuscarRolPorNombre(comboRol.getSelectedItem().toString());
+				System.out.println(r);
+				p.setRol(r);
+				
+				if (DAOPersona.Cargargar(p)) {
+					JOptionPane.showMessageDialog(null, "Se cargó correctamente la persona");
+				}else {
+					JOptionPane.showMessageDialog(null, "No se cargó la persona");
+				}
+			}else {
+				JOptionPane.showMessageDialog(null, "No pueden quedar campos vacios");
+			}
+		
 				
 			}
 			
@@ -267,6 +396,25 @@ public class JfPersona extends JFrame {
 		
 	}
 	
+	// cargar combo fecha
+	public void cargarComboFecha() {
+		for(int i =1 ; i < 32; i++) {
+		comboDia.addItem(i);
+		
+		}
+		for(int i =1 ; i <13 ; i++) {
+			comboMes.addItem(i);
+			
+			}
+		
+		for(int i =1940 ; i <2022 ; i++) {
+			comboAño.addItem(i);
+			
+			}
+		
+		
+	}
+	
 	// Métodos para limpiar las cajas de texto
 	
 	public void Limpiar() {
@@ -275,8 +423,7 @@ public class JfPersona extends JFrame {
 		textA2.setText("");
 		textN1.setText("");
 		textN2.setText("");
-		textFecha.setText("");
+		//textFecha.setText("");
 		textCorreo.setText("");
 	}
-	
 }

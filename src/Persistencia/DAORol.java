@@ -19,15 +19,7 @@ public class DAORol {
 	private static final String ALL_ROL = "Select * from rol";
 	
 	private static final String ROL_NOMBRE = "Select * from rol where nombre=?";
-	
-	private static final String INSERT_ROL = "INSERT INTO ROL(ID_ROL,NOMBRE,DESCRIPCION) VALUES(SEQ_ID_ROL.NEXTVAL,?,?)";
-
-	private static final String BUSCAR_ROL= "SELECT * FROM ROL WHERE ID_ROL = ?";
-	
-	private static final String UPDATE_ROL = "UPDATE ROL SET NOMBRE=?, DESCRIPCION=? WHERE ID_ROL=(select ID_ROL from persona where NOMBRE=?";
-	
-	private static final String DELETE_ROL = "DELETE FROM ROL WHERE ID_ROL=?"; 
-	
+	private static final String ROL_ID= "Select * from rol where id_rol=?";
 	
 	
 	public static List<Rol> ListarRol(){
@@ -79,7 +71,28 @@ public static Rol BuscarRolPorNombre(String nombre){
 	
 	
 	
+public static Rol BuscarRolId(String nombre){
 	
+    Rol r = new Rol();
+  
+	try {
+		PreparedStatement statement = DatabaseManager.getConnection().prepareStatement(ROL_ID);
+		statement.setString(1,nombre);
+		ResultSet resultado = statement.executeQuery();
+		while(resultado.next()) {
+	
+			r.setId(Integer.parseInt(resultado.getString("Id_Rol")));
+			r.setNombre (resultado.getString("Nombre"));
+		
+			r.setDescripcion(resultado.getString("Descripcion"));				
+		}
+		return r;
+	}catch(SQLException e) {
+		e.printStackTrace();
+		return r;
+	}
+	
+}
 	
 	
 	
@@ -92,7 +105,7 @@ public static Rol BuscarRolPorNombre(String nombre){
 	public static boolean Cargargar(Rol datos) {
 		
 		try {
-			PreparedStatement statement = DatabaseManager.getConnection().prepareStatement("INSERT_ROL");
+			PreparedStatement statement = DatabaseManager.getConnection().prepareStatement("");
 			
 		    /*statement.setString(1, datos.getDocumento());
 			statement.setString(2, datos.getApellido1());

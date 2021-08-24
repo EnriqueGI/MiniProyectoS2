@@ -1,12 +1,10 @@
 package Logica;
-import java.util.LinkedList;
 
 public class Rol {
 	private int id;
 	private String nombre;
 	private String descripcion;
-	private LinkedList<Persona> empleados;
-	private LinkedList<Funcionalidad> funcionalidades;
+	
 	
 	public Rol() {
 		
