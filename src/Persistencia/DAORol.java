@@ -20,6 +20,14 @@ public class DAORol {
 	
 	private static final String ROL_NOMBRE = "Select * from rol where nombre=?";
 	
+	private static final String INSERT_ROL = "INSERT INTO ROL(ID_ROL,NOMBRE,DESCRIPCION) VALUES(SEQ_ID_ROL.NEXTVAL,?,?)";
+
+	private static final String BUSCAR_ROL= "SELECT * FROM PERSONA WHERE ID_ROL = ?";
+	
+	private static final String UPDATE_ROL = "UPDATE PERSONA SET DOCUMENTO=?, APELLIDO1=?, APELLIDO2=?, NOMBRE1=?, NOMBRE2=? WHERE ID_PERSONA=(select id_persona from persona where documento=?";
+	
+	private static final String DELETE_ROL = "DELETE FROM PERSONA WHERE ID_PERSONA=?"; 
+	
 	
 	
 	public static List<Rol> ListarRol(){
@@ -84,7 +92,7 @@ public static Rol BuscarRolPorNombre(String nombre){
 	public static boolean Cargargar(Rol datos) {
 		
 		try {
-			PreparedStatement statement = DatabaseManager.getConnection().prepareStatement("");
+			PreparedStatement statement = DatabaseManager.getConnection().prepareStatement("INSERT_ROL");
 			
 		    /*statement.setString(1, datos.getDocumento());
 			statement.setString(2, datos.getApellido1());
