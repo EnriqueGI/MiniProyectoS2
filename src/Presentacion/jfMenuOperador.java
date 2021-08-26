@@ -35,7 +35,6 @@ public class jfMenuOperador extends JFrame {
 	 */
 	public jfMenuOperador() {
 		setBackground(Color.BLACK);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 872, 568);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);
