@@ -37,7 +37,7 @@ public class DAOPersona {
 	// LOGIN
 
 	public static int Login(String mail, String clve) {
-		Persona  p = new Persona();
+	
 		try {
 			PreparedStatement statement = DatabaseManager.getConnection().prepareStatement(LOGIN);
 			statement.setString(1,mail);

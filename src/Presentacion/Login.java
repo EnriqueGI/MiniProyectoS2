@@ -80,6 +80,13 @@ public class Login extends JFrame {
 					m1.setVisible(true);
 					setVisible(false);
 				
+				}else if(Principal.Login(textCorreo.getText(),passwordField.getText())== 2) {
+					labelEstado.setText("Usuario correcto");
+					jfMenuOperador fUsuario = new jfMenuOperador();
+				
+					fUsuario.setVisible(true);
+				    setVisible(false);
+					
 				}else {
 					labelEstado.setText("Usuario o contraseña incorrecto");
 					

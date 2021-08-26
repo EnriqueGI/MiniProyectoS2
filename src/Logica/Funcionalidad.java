@@ -1,7 +1,6 @@
 package Logica;
 
 public class Funcionalidad {
-	private int id;
 	private String nombre;
 	private String descripcion;
 	
@@ -27,12 +26,7 @@ public class Funcionalidad {
 	public void setDescripcion(String d){
 		this.descripcion = d;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int i) {
-		this.id = i;
-	}
+	
 
 	
 }
