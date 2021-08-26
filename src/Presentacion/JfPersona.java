@@ -187,7 +187,13 @@ public class JfPersona extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Persona p = new Persona();
 				
-				if(!textDocumento.getText().equals("")) {
+				if(textDocumento.getText().equals("") || textA1.getText().equals("") ||
+						textA2.getText().equals("") || textN1.getText().equals("") ||
+						textN2.getText().equals("") || textClave.getText().equals("") ||
+						textCorreo.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "No pueden quedar campos vacios");
+				
+				}else {
 					
 					p.setDocumento(textDocumento.getText());
 					p.setApellido1(textA1.getText());
@@ -208,11 +214,9 @@ public class JfPersona extends JFrame {
 					if(DAOPersona.edit(p)) {
 						JOptionPane.showMessageDialog(null, "Se actualizó la persona");
 					}else {
-						JOptionPane.showMessageDialog(null, "NO se actualizó la persona");
+						JOptionPane.showMessageDialog(null, "NO existe una persona con ese documento");
 					}
 					
-				}else {
-					JOptionPane.showMessageDialog(null, "Debe ingresar un documento");
 				}
 				
 				
