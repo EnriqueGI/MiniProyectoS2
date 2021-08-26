@@ -80,6 +80,14 @@ public class MenuPrincipal extends JFrame {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setForeground(SystemColor.menu);
+		panel_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				jfRol fr = new jfRol();
+				
+				fr.setVisible(true);
+			}
+		});
 		panel_1.setBackground(UIManager.getColor("MenuItem.background"));
 		panel_1.setLayout(null);
 		panel_1.setBounds(399, 200, 241, 202);
