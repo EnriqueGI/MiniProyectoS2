@@ -1,9 +1,11 @@
 package Logica;
 
+import java.util.LinkedList;
+
 public class Funcionalidad {
 	private String nombre;
 	private String descripcion;
-	
+	LinkedList<Rol> listaRoles = new LinkedList<Rol>();
 	//Constructores
 	public Funcionalidad(){
 		
@@ -25,6 +27,12 @@ public class Funcionalidad {
 	}
 	public void setDescripcion(String d){
 		this.descripcion = d;
+	}
+	public LinkedList<Rol> getListaRoles() {
+		return listaRoles;
+	}
+	public void setListaRoles(LinkedList<Rol> listaRoles) {
+		this.listaRoles = listaRoles;
 	}
 	
 

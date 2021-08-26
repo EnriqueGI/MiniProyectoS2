@@ -1,10 +1,13 @@
 package Logica;
 
+import java.util.LinkedList;
+
 public class Rol {
 	private int id;
 	private String nombre;
 	private String descripcion;
-	
+	LinkedList <Persona> listaPersonas = new LinkedList<Persona>();
+	LinkedList <Funcionalidad> listaFuncionalidad = new LinkedList<Funcionalidad>();
 	
 	public Rol() {
 		
@@ -36,6 +39,25 @@ public class Rol {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	
+	
+	
+	
+	public LinkedList<Persona> getListaPersonas() {
+		return listaPersonas;
+	}
+	public void setListaPersonas(LinkedList<Persona> listaPersonas) {
+		this.listaPersonas = listaPersonas;
+	}
+	
+	
+	
+	public LinkedList<Funcionalidad> getListaFuncionalidad() {
+		return listaFuncionalidad;
+	}
+	public void setListaFuncionalidad(LinkedList<Funcionalidad> listaFuncionalidad) {
+		this.listaFuncionalidad = listaFuncionalidad;
 	}
 	@Override
 	public String toString() {
