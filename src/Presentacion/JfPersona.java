@@ -66,6 +66,7 @@ public class JfPersona extends JFrame {
 	 * Create the frame.
 	 */
 	public JfPersona() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 874, 659);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
