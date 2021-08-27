@@ -72,7 +72,7 @@ public class DAOPersona {
 			statement.setString(2, datos.getApellido1());
 			statement.setString(3, datos.getApellido2());
 			statement.setString(4, datos.getNombre1());
-			statement.setString(5, datos.getNombre1());
+			statement.setString(5, datos.getNombre2());
 			String fecha = datos.getFechaNac().format(formatter);
 			statement.setString(6, fecha);
 			statement.setString(7, datos.getClave());
@@ -108,7 +108,7 @@ public class DAOPersona {
 				p.setDocumento(resultado.getString("Documento"));
 			
 				p.setApellido1(resultado.getString("Apellido1"));
-				p.setApellido2(resultado.getString("Apellido1"));
+				p.setApellido2(resultado.getString("Apellido2"));
 				p.setNombre1(resultado.getString("Nombre1"));
 				p.setNombre2(resultado.getString("Nombre2"));
 				p.setMail(resultado.getString("Mail"));
