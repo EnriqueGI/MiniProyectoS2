@@ -79,15 +79,20 @@ public class MenuPrincipal extends JFrame {
 		panel.add(lblNewLabel);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setForeground(SystemColor.menu);
 		panel_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				jfRol fr = new jfRol();
 				
-				fr.setVisible(true);
+				jfRol r = new jfRol();
+			  
+				
+				r.setVisible(true);
+			
+				
+				
 			}
 		});
+		panel_1.setForeground(SystemColor.menu);
 		panel_1.setBackground(UIManager.getColor("MenuItem.background"));
 		panel_1.setLayout(null);
 		panel_1.setBounds(399, 200, 241, 202);
@@ -101,7 +106,6 @@ public class MenuPrincipal extends JFrame {
 		panel_1.add(lblVentas);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setForeground(SystemColor.menu);
 		panel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -113,6 +117,7 @@ public class MenuPrincipal extends JFrame {
 				
 			}
 		});
+		panel_2.setForeground(SystemColor.menu);
 		panel_2.setBackground(UIManager.getColor("MenuItem.background"));
 		panel_2.setLayout(null);
 		panel_2.setBounds(700, 200, 252, 202);

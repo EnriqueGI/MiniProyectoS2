@@ -20,6 +20,7 @@ public class jfMenuOperador extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				
 				try {
 					jfMenuOperador frame = new jfMenuOperador();
 					frame.setVisible(true);
@@ -35,6 +36,7 @@ public class jfMenuOperador extends JFrame {
 	 */
 	public jfMenuOperador() {
 		setBackground(Color.BLACK);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 872, 568);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);

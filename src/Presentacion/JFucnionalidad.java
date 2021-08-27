@@ -10,18 +10,20 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import Logica.Funcionalidad;
+import Logica.Persona;
 import Persistencia.DAOFuncionalidades;
+import Persistencia.DAOPersona;
 
-
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class JFucnionalidad {
 
 	private JFrame frame;
-	private JTextField mainDisplay;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -52,150 +54,158 @@ public class JFucnionalidad {
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 892, 479);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		JButton Buscar = new JButton("Buscar");
 		Buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		Buscar.setBounds(304, 37, 89, 23);
+		Buscar.setBounds(672, 35, 89, 23);
 		frame.getContentPane().add(Buscar);
-		
+
 		JButton Modificar = new JButton("Modificar");
-		Modificar.setBounds(304, 82, 89, 23);
+		Modificar.setBounds(672, 80, 89, 23);
 		frame.getContentPane().add(Modificar);
-		
+
 		JButton Eliminar = new JButton("Eliminar");
-		Eliminar.setBounds(304, 132, 89, 23);
+		Eliminar.setBounds(672, 130, 89, 23);
 		frame.getContentPane().add(Eliminar);
-		
+
 		JButton Agregar = new JButton("Agregar");
-		Agregar.setBounds(304, 177, 89, 23);
+		Agregar.setBounds(672, 175, 89, 23);
 		frame.getContentPane().add(Agregar);
-		
+
 		JButton listarFuncionalidades = new JButton("Listar Funcionalidades");
 		listarFuncionalidades.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				((DefaultTableModel) table.getModel()).setNumRows(0);
+
+				for (Funcionalidad p : DAOFuncionalidades.findAll()) {
+
+					Object[] fila = new Object[3];
+
+					fila[0] = String.valueOf(p.getId());
+					fila[1]	=String.valueOf(p.getNombre());
+					fila[2] = String.valueOf(p.getDescripcion());
+			
+
+					((DefaultTableModel) table.getModel()).addRow(fila);
+
+				}
 			}
 		});
-		listarFuncionalidades.setBounds(59, 23, 164, 23);
+		listarFuncionalidades.setBounds(294, 175, 164, 23);
 		frame.getContentPane().add(listarFuncionalidades);
-		
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(10, 65, 284, 74);
-		frame.getContentPane().add(scrollPane_2);
-		
-		mainDisplay = new JTextField();
-		scrollPane_2.setViewportView(mainDisplay);
-		mainDisplay.setColumns(10);
-		scrollPane_2.setVisible(false);
-		
-		String Funciones = DAOFuncionalidades.Funcionalidades();
-		
-		scrollPane_2.setVisible(false);
-		
-		
-	
-		listarFuncionalidades.addActionListener (new ActionListener() {
+
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		panel_1.setBounds(28, 228, 810, 166);
+		frame.getContentPane().add(panel_1);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(52, 26, 748, 129);
+		panel_1.add(scrollPane);
+
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "Nombre", "Descripci\u00F3n"
+			}
+		));
+		scrollPane.setViewportView(table);
+
+		Buscar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainDisplay.setText(null);
-				scrollPane_2.setVisible(true);
-				mainDisplay.setText(Funciones);
-			
-			
-			}
-		
-		
-	});
-	
-	Buscar.addActionListener(new ActionListener() {
+                Funcionalidad f = new Funcionalidad();
+				String nombre_1 = JOptionPane.showInputDialog("Nombre: ");
+				f = DAOFuncionalidades.findFuncionalidad(nombre_1);
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-	    
-	  String nombre_1 = JOptionPane.showInputDialog("Nombre: ");
-	    String busquedaFuncion = DAOFuncionalidades.findFuncionalidad(nombre_1);
-	
-		mainDisplay.setText(null);
-		scrollPane_2.setVisible(true);
-		mainDisplay.setText(busquedaFuncion);
-    }
-		
-	});
-	
-	Agregar.addActionListener (new ActionListener() {
+				((DefaultTableModel) table.getModel()).setNumRows(0);
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			
-			mainDisplay.setText(null);
-			scrollPane_2.setVisible(true);
-			
-			int id = DAOFuncionalidades.maximo(); 
-			
-			id++;
-			
-			String nombre = JOptionPane.showInputDialog("Nombre de la Funcionalidad: ");
-			String descripcion = JOptionPane.showInputDialog("Descripcion de la Funcionalidad: ");
-			
-			Funcionalidad g = new Funcionalidad( nombre, descripcion);
-			
-			if (DAOFuncionalidades.insert(g)) {
 				
-				mainDisplay.setText("Funcionalidad ingresada cone exito");
-			}else {
-				mainDisplay.setText("No se pudo ingresar la funcionalidad");	
-			}
-		}
-});
-	
-	Modificar.addActionListener (new ActionListener() {
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			mainDisplay.setText(null);
-			scrollPane_2.setVisible(true);
-			String id_1_String = JOptionPane.showInputDialog("ID de la Funcionalidad la cual desea Modificar: ");
-			
-			int id_1 = Integer.parseInt(id_1_String);
-			
-			String nombre = JOptionPane.showInputDialog("Nuevo nombre de la Funcionalidad: ");
-			String descripcion = JOptionPane.showInputDialog("Nueva descripcion de la Funcionalidad: ");
-			
-			Funcionalidad g = new Funcionalidad( nombre, descripcion);
-			
-            if (DAOFuncionalidades.edit(g)) {	
-				mainDisplay.setText("Funcionalidad editada cone exito");
-			}else {
-				mainDisplay.setText("No se pudo editar la funcionalidad");	
-			}
-		}
-});
-	Eliminar.addActionListener (new ActionListener() {
+					Object[] fila = new Object[7];
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			mainDisplay.setText(null);
-			scrollPane_2.setVisible(true);
+					fila[0] = String.valueOf(f.getId());
+					fila[1]	=String.valueOf(f.getNombre());
+					fila[2] = String.valueOf(f.getDescripcion());
 			
-			String id_2_String = JOptionPane.showInputDialog("ID de la Persona a la Cual se Desea Eliminar: ");
-			
-			int id_2 = Integer.parseInt(id_2_String);
-			
-			if (DAOFuncionalidades.delete(id_2)) {	
-				mainDisplay.setText("Funcionalidad eliminada cone exito");
-			}else {
-				mainDisplay.setText("No se pudo eliminar la funcionalidad");	
-			}
-		}
-});
-	
-}
 
+					((DefaultTableModel) table.getModel()).addRow(fila);
+
+				
+				
+
+			}
+
+		});
+
+		Agregar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				String nombre = JOptionPane.showInputDialog("Nombre de la Funcionalidad: ");
+				String descripcion = JOptionPane.showInputDialog("Descripcion de la Funcionalidad: ");
+
+				Funcionalidad g = new Funcionalidad(nombre, descripcion);
+
+				if (DAOFuncionalidades.insert(g)) {
+					JOptionPane.showMessageDialog(null, "Se agregó la funcionalidad");
+
+				} else {
+					JOptionPane.showMessageDialog(null, "No se puedo agregar la funcionalidad");
+				}
+			}
+		});
+
+		Modificar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String id = JOptionPane.showInputDialog("Id de la funcionalidad a modificar: ");
+				
+				int idElininar = Integer.parseInt(id);
+				String nombre = JOptionPane.showInputDialog("Nuevo nombre de la Funcionalidad: ");
+				String descripcion = JOptionPane.showInputDialog("Nueva descripcion de la Funcionalidad: ");
+
+				Funcionalidad f = new Funcionalidad();
+				
+				f.setId(idElininar);
+				f.setNombre(nombre);
+				f.setDescripcion(descripcion);
+
+				if (DAOFuncionalidades.edit(f)) {
+					JOptionPane.showMessageDialog(null, "Se actualizó la funcionalidad");
+				} else {
+					JOptionPane.showMessageDialog(null, "No se puedo actualizar la funcionalidad");
+				}
+			}
+		});
+		Eliminar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				String nombre = JOptionPane.showInputDialog("ID de la Persona a la Cual se Desea Eliminar: ");
+
+			
+
+				if (DAOFuncionalidades.delete(nombre)) {
+					JOptionPane.showMessageDialog(null, "Se eliminó la funcionalidad");
+				} else {
+					JOptionPane.showMessageDialog(null, " la funcionalidad");
+				}
+			}
+		});
+
+	}
 }

@@ -159,7 +159,7 @@ public class jfRol extends JFrame {
 						textNomRol.setText(r.getNombre());
 						textDescripcion.setText(r.getDescripcion());
 					}else {
-						JOptionPane.showMessageDialog(null, "No se encontró un rol con esos datos");
+						JOptionPane.showMessageDialog(null, "No se encontrÃ³ un rol con esos datos");
 						
 						Limpiar();
 					}}
