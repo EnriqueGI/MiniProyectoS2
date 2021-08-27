@@ -101,6 +101,7 @@ public class MenuPrincipal extends JFrame {
 		panel_1.add(lblVentas);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setForeground(SystemColor.menu);
 		panel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -112,7 +113,6 @@ public class MenuPrincipal extends JFrame {
 				
 			}
 		});
-		panel_2.setForeground(SystemColor.menu);
 		panel_2.setBackground(UIManager.getColor("MenuItem.background"));
 		panel_2.setLayout(null);
 		panel_2.setBounds(700, 200, 252, 202);
