@@ -18,7 +18,7 @@ import java.awt.event.MouseEvent;
 import java.awt.SystemColor;
 
 public class MenuPrincipal extends JFrame {
-	
+
 	private JPanel contentPane;
 
 	/**
@@ -26,7 +26,6 @@ public class MenuPrincipal extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
-		
 			public void run() {
 				try {
 					MenuPrincipal frame = new MenuPrincipal();
@@ -42,6 +41,8 @@ public class MenuPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuPrincipal() {
+		jfRol fr = new jfRol();
+		JfPersona fP = new JfPersona();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1032, 647);
 		contentPane = new JPanel();
@@ -53,19 +54,18 @@ public class MenuPrincipal extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setForeground(SystemColor.menu);
 		panel.addMouseListener(new MouseAdapter() {
+			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				JfPersona fP = new JfPersona();
 			    fP.cargarRoles(DAORol.ListarRol());
 			    fP.cargarComboFecha();
 				
 				fP.setVisible(true);
-			
 				
-				
+				fr.setVisible(false);
 			}
 		});
+		
 		panel.setBackground(UIManager.getColor("MenuItem.background"));
 		panel.setBounds(83, 200, 241, 202);
 		contentPane.add(panel);
@@ -79,20 +79,15 @@ public class MenuPrincipal extends JFrame {
 		panel.add(lblNewLabel);
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setForeground(SystemColor.menu);
 		panel_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				jfRol r = new jfRol();
-			  
-				
-				r.setVisible(true);
-			
-				
-				
+				jfRol fr = new jfRol();
+				fr.cargarIdRol(DAORol.ListarRol());
+				fr.setVisible(true);
 			}
 		});
-		panel_1.setForeground(SystemColor.menu);
 		panel_1.setBackground(UIManager.getColor("MenuItem.background"));
 		panel_1.setLayout(null);
 		panel_1.setBounds(399, 200, 241, 202);
@@ -106,18 +101,14 @@ public class MenuPrincipal extends JFrame {
 		panel_1.add(lblVentas);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setForeground(SystemColor.menu);
 		panel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JFucnionalidad window = new JFucnionalidad();
+				JFuncionalidad window = new JFuncionalidad();
 				window.main(null);
-			
-				
-				
-				
 			}
 		});
-		panel_2.setForeground(SystemColor.menu);
 		panel_2.setBackground(UIManager.getColor("MenuItem.background"));
 		panel_2.setLayout(null);
 		panel_2.setBounds(700, 200, 252, 202);

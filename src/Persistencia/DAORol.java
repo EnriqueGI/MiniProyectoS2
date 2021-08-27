@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-
+import Logica.Persona;
 import Logica.Rol;
 
 public class DAORol {

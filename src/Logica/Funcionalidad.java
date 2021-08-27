@@ -3,7 +3,7 @@ package Logica;
 import java.util.LinkedList;
 
 public class Funcionalidad {
-	private long id;
+	private int id;
 	private String nombre;
 	private String descripcion;
 	LinkedList<Rol> listaRoles = new LinkedList<Rol>();
@@ -35,17 +35,16 @@ public class Funcionalidad {
 	public void setListaRoles(LinkedList<Rol> listaRoles) {
 		this.listaRoles = listaRoles;
 	}
-	@Override
-	
-	
-	public String toString() {
-		return "Funcionalidad [nombre=" + nombre + ", descripcion=" + descripcion + ", listaRoles=" + listaRoles + "]";
-	}
-	public long getId() {
+	public int getID() {
 		return id;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setId(int i) {
+		this.id = i;
+	}
+	@Override
+	public String toString() {
+		return "Funcionalidad [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", listaRoles="
+				+ listaRoles + "]";
 	}
 	
 
