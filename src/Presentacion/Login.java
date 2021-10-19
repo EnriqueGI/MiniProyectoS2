@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-
+import Logica.Usuario;
 
 import javax.swing.JButton;
 import javax.swing.JTextArea;
@@ -70,22 +70,34 @@ public class Login extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				labelEstado.setText("");
-				
-				if(Principal.Login(textCorreo.getText(),passwordField.getText())== 1) {
+				Usuario u = Principal.Login(textCorreo.getText(),passwordField.getText());
+				if(u.getRol()== 1) {
 					
 					
 					labelEstado.setText("Usuario correcto");
-						MenuPrincipal m1 = new MenuPrincipal();
-					
-					m1.setVisible(true);
+						
+                       FormAdministrador Fa = new FormAdministrador();
+				
+                    Fa.setVisible(true);
+                	Fa.labelNombreAdmin.setText(u.getNombre());
 					setVisible(false);
+					
 				
-				}else if(Principal.Login(textCorreo.getText(),passwordField.getText())== 2) {
+				}else if(u.getRol()== 2) {
 					labelEstado.setText("Usuario correcto");
-					jfMenuOperador fUsuario = new jfMenuOperador();
-				
-					fUsuario.setVisible(true);
-				    setVisible(false);
+					FormInvestigador Fi = new FormInvestigador();
+						
+	                    Fi.setVisible(true);
+						setVisible(false);
+						
+				}else if(u.getRol()== 3) {
+					labelEstado.setText("Usuario correcto");
+					FormAficionado Faf = new FormAficionado();
+						
+					Faf.setVisible(true);
+						setVisible(false);
+						
+					
 					
 				}else {
 					labelEstado.setText("Usuario o contraseña incorrecto");
